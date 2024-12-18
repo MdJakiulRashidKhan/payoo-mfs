@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.22/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <main class="flex justify-center">
+        <div class="mockup-phone">
+            <div class="camera"></div>
+            <div class="display">
+              <div class="artboard artboard-demo phone-3">
+                <div class="stats shadow">
+                    <div class="stat">
+                      <div  id="balance" class="stat-value">89400</div>
+                      <div class="stat-desc">Available Balance</div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div>
+                    <button id="addMoney-btn" class="btn btn-lg">Add Money</button>
+                   <button id="cashOut-btn" class="btn btn-lg">Cash Out</button>
+                </div>
+                <div class="divider"></div>
+                <div id="addMoney" class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <form class="card-body">
+                      <div class="form-control">
+                        <label class="label">
+                          <span class="label-text">Amount</span>
+                        </label>
+                        <input id="amount" type="Text" placeholder="Enter your Amount" class="input input-bordered" required />
+                      </div>
+                      <div class="form-control">
+                        <label class="label">
+                          <span class="label-text">4 Digit Pin</span>
+                        </label>
+                        <input id="pin-number" type="password" placeholder="Enter 4 Digit Pin" class="input input-bordered" required  />
+                      </div>
+                      <div class="form-control mt-6">
+                        <button class="btn btn-primary" id="add-money-btn">Add Money</button>
+                      </div>
+                    </form>
+                </div>
+                <!-- cash out  -->
+                <div id="cashOut" class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl hidden">
+                    <form class="card-body">
+                      <div class="form-control">
+                        <label class="label">
+                          <span class="label-text">Amount</span>
+                        </label>
+                        <input id="amount-out" type="Text" placeholder="Enter your Amount" class="input input-bordered" required />
+                      </div>
+                      <div class="form-control">
+                        <label class="label">
+                          <span class="label-text">4 Digit Pin</span>
+                        </label>
+                        <input id="pin-out" type="password" placeholder="Enter 4 Digit Pin" class="input input-bordered" required  />
+                      </div>
+                      <div class="form-control mt-6">
+                        <button class="btn btn-primary" id="cash-out-btn">Cash Out</button>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+    </main>
+    <script>
+        document.getElementById('cashOut-btn').addEventListener('click',function(){
+            document.getElementById('cashOut').classList.remove('hidden');
+            document.getElementById('addMoney').classList.add('hidden');
+        })
+        document.getElementById('addMoney-btn').addEventListener('click',function(){
+            document.getElementById('cashOut').classList.add('hidden');
+            document.getElementById('addMoney').classList.remove('hidden');
+        })
+    </script>
+    <script>
+        document.getElementById('add-money-btn').addEventListener('click',function(event){
+            event.preventDefault();
+            const amount = document.getElementById('amount').value;
+            const pinNumber = document.getElementById('pin-number').value;
+            console.log(amount , pinNumber);
+
+            if(pinNumber === '1234'){
+                console.log('login successfully');
+
+                const balance = document.getElementById('balance').innerText;
+                console.log(balance);
+                const balanceNumber = parseFloat(balance);
+                const amountNumber = parseFloat(amount);
+                console.log(amountNumber , balanceNumber);
+                const newBalance =balanceNumber+amountNumber ;
+                console.log(newBalance);
+                 document.getElementById('balance').innerText =newBalance;
+            }
+            else{
+                alert('Enter Correct Pin');
+            }
+        })
+    </script>
+    <script>
+        document.getElementById('cash-out-btn').addEventListener('click',function(event){
+            event.preventDefault();
+            const amountOut = document.getElementById('amount-out').value;
+            const pinOut = document.getElementById('pin-out').value;
+
+            if(pinOut === '1234'){
+                console.log('login successfully');
+
+                const balance = document.getElementById('balance').innerText;
+                console.log(balance);
+                const balanceOutNumber = parseFloat(balance);
+                const outNumber = parseFloat(amountOut);
+                const newBalance =balanceOutNumber-outNumber ;
+                console.log(newBalance);
+                 document.getElementById('balance').innerText =newBalance;
+            }
+            else{
+                alert('Enter Correct Pin');
+            }
+        })
+    </script>
+</body>
+</html>
